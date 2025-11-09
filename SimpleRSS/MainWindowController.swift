@@ -23,13 +23,7 @@ class MainWindowController: NSWindowController {
     var feeds = [Feed]()
     var feed: Feed! {
         didSet {
-            self.feeds.insert(self.feed, at: 0)
-            self.popupMenu.insertItem(withTitle: self.feed.title, at: 0)
-            self.popupMenu.select(self.popupMenu.itemArray[0])
-            self.user.set(self.feed!, key: .lastFeed)
-            self.user.set(self.feeds, key: .feeds)
-            self.sideBar.feed = self.feed
-            self.sideBar.tableView.reloadData()
+            self.setFeed()
         }
     }
     var user = UserDefaultsController()
@@ -39,8 +33,8 @@ class MainWindowController: NSWindowController {
         super.windowDidLoad()
         // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
         
-        //let appDomain = Bundle.main.bundleIdentifier
-        //UserDefaults.standard.removePersistentDomain(forName: appDomain!)
+        // let appDomain = Bundle.main.bundleIdentifier
+        // UserDefaults.standard.removePersistentDomain(forName: appDomain!)
         
         let splitController = contentViewController as? NSSplitViewController
         sideBar = splitController?.splitViewItems[0].viewController as? SidebarViewController
@@ -99,6 +93,18 @@ class MainWindowController: NSWindowController {
         sideBar.refresh()
     }
     
+    func setFeed(_ isInsert: Bool = false) {
+        if isInsert {
+            self.feeds.insert(self.feed, at: 0)
+            self.popupMenu.insertItem(withTitle: self.feed.title, at: 0)
+            self.popupMenu.select(self.popupMenu.itemArray[0])
+            self.user.set(self.feeds, key: .feeds)
+        }
+        self.user.set(self.feed!, key: .lastFeed)
+        self.sideBar.feed = self.feed
+        self.sideBar.tableView.reloadData()
+    }
+    
     func addFeed(_ url: String) {
         if url == "canceled" {
             if feeds.count < 1 {
@@ -123,6 +129,7 @@ class MainWindowController: NSWindowController {
                         self.popupMenu.removeItem(at: 0)
                     }
                     self.feed = Feed(url, title: title)
+                    self.setFeed(true)
                 }
             } else {
                 DispatchQueue.main.async {

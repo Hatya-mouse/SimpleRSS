@@ -203,7 +203,7 @@
         <scene sceneID="Tsr-05-Sld">
             <objects>
                 <windowController id="TY6-zL-5vX" customClass="MainWindowController" customModule="SimpleRSS" customModuleProvider="target" sceneMemberID="viewController">
-                    <window key="window" title="BBC News" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="MZ5-t6-3Aw">
+                    <window key="window" title="SimpleRSS" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="MZ5-t6-3Aw">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="330" y="279" width="800" height="400"/>
@@ -216,7 +216,7 @@
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="86D49B19-64EF-4320-ADEF-CA8A1F166046" label="Feed" paletteLabel="Select Feed" sizingBehavior="auto" id="cou-VL-Kbe">
                                     <nil key="toolTip"/>
-                                    <popUpButton key="view" verticalHuggingPriority="750" misplaced="YES" id="vpY-95-qP8" userLabel="BBC News">
+                                    <popUpButton key="view" verticalHuggingPriority="750" id="vpY-95-qP8" userLabel="BBC News">
                                         <rect key="frame" x="18" y="14" width="35" height="25"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" selectedItem="oDb-VW-Da0" id="2sq-L4-cVi" userLabel="BBC News">
@@ -308,13 +308,13 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="60" horizontalPageScroll="10" verticalLineScroll="60" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L1Y-ll-bbD">
-                                <rect key="frame" x="0.0" y="0.0" width="267" height="759"/>
+                                <rect key="frame" x="0.0" y="0.0" width="267" height="861"/>
                                 <clipView key="contentView" drawsBackground="NO" id="ld5-t2-4I2">
-                                    <rect key="frame" x="1" y="1" width="265" height="757"/>
+                                    <rect key="frame" x="1" y="1" width="265" height="859"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" tableStyle="sourceList" selectionHighlightStyle="sourceList" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="60" rowSizeStyle="automatic" viewBased="YES" id="aun-DS-p4b">
-                                            <rect key="frame" x="0.0" y="0.0" width="265" height="757"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="265" height="859"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="17" height="0.0"/>
                                             <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>
