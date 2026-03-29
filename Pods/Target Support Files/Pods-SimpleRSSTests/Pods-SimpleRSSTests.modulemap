@@ -1,6 +1,0 @@
-framework module Pods_SimpleRSSTests {
-  umbrella header "Pods-SimpleRSSTests-umbrella.h"
-
-  export *
-  module * { export * }
-}

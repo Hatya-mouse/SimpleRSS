@@ -10,7 +10,9 @@ import Alamofire
 import SwiftyJSON
 
 /// RSSフィード。
-class Feed: NSObject, NSCoding {
+class Feed: NSObject, NSCoding, NSSecureCoding {
+    static let supportsSecureCoding: Bool = true
+    
     /// RSS の URL。
     let url: String
     /// RSS のタイトル。
@@ -40,7 +42,7 @@ class Feed: NSObject, NSCoding {
 extension UserDefaults {
     func feed(forKey key: String) -> Feed? {
         if let storedData = self.object(forKey: key) as? Data {
-            if let unarchivedObject = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(storedData) as? Feed {
+            if let unarchivedObject = try! NSKeyedUnarchiver.unarchivedObject(ofClass: Feed.self, from: storedData) {
                 return unarchivedObject
             }
         }
@@ -48,10 +50,14 @@ extension UserDefaults {
     }
     
     func feedArray(forKey key: String) -> [Feed]? {
-        if let storedData = self.object(forKey: key) as? Data {
-            if let unarchivedObject = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(storedData) as? [Feed] {
-                return unarchivedObject
+        if let storedData = self.array(forKey: key) {
+            var unarchivedFeeds = [Feed]()
+            for feedData in storedData {
+                if let unarchivedObject = try! NSKeyedUnarchiver.unarchivedObject(ofClass: Feed.self, from: feedData as! Data) {
+                    unarchivedFeeds.append(unarchivedObject)
+                }
             }
+            return unarchivedFeeds
         }
         return nil
     }
@@ -61,7 +67,7 @@ extension UserDefaults {
         if #available(macOS 10.13, *) {
             data = try! NSKeyedArchiver.archivedData(withRootObject: feed, requiringSecureCoding: false)
         } else {
-            data = try! NSKeyedArchiver.archivedData(withRootObject: feed)
+            data = NSKeyedArchiver.archivedData(withRootObject: feed)
         }
         self.set(data, forKey: key)
     }
@@ -71,7 +77,7 @@ extension UserDefaults {
         if #available(macOS 10.13, *) {
             data = try! NSKeyedArchiver.archivedData(withRootObject: feeds, requiringSecureCoding: false)
         } else {
-            data = try! NSKeyedArchiver.archivedData(withRootObject: feeds)
+            data = NSKeyedArchiver.archivedData(withRootObject: feeds)
         }
         self.set(data, forKey: key)
     }

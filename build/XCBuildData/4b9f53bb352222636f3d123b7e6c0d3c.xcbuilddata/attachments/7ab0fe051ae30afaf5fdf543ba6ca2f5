@@ -1,0 +1,5 @@
+ extern const unsigned char Pods_SimpleRSSTestsVersionString[];
+ extern const double Pods_SimpleRSSTestsVersionNumber;
+
+ const unsigned char Pods_SimpleRSSTestsVersionString[] __attribute__ ((used)) = "@(#)PROGRAM:Pods_SimpleRSSTests  PROJECT:Pods-1" "\n";
+ const double Pods_SimpleRSSTestsVersionNumber __attribute__ ((used)) = (double)1.;

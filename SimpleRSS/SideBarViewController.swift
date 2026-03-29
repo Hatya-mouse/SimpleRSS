@@ -58,35 +58,40 @@ class SidebarViewController: NSViewController, NSTableViewDelegate, NSTableViewD
     }
     
     func refresh(_ webView: Bool = true) {
-        request(feed.getJsonURL()).responseData { response in
-            var isOK = false
-            print("------------------------Feed----------------------")
-            if let values = response.result.value {
-                let json = JSON(values)
-                print("Feed from \(json["feed"]["title"])")
-                self.view.window?.title = json["feed"]["title"].stringValue
-                print("--------------------------------------------------")
-                self.news.removeAll()
-                json["items"].forEach { i, value in
-                    self.news.append(News(value["title"].string!, link: value["link"].string!, description: value["content"].string!))
-                    print("Title: \(value["title"].string!)")
-                    print("  URL: \(value["link"].string!)")
+        AF.request(feed.getJsonURL())
+            .validate().response() { response in
+                var isOK = false
+                
+                switch response.result {
+                case .success(let values):
+                    let json = JSON(values as Any)
+                    print("Feed from \(json["feed"]["title"])")
+                    self.view.window?.title = json["feed"]["title"].stringValue
+                    print("--------------------------------------------------")
+                    self.news.removeAll()
+                    json["items"].forEach { i, value in
+                        self.news.append(News(value["title"].string!, link: value["link"].string!, description: value["content"].string!))
+                        print("Title: \(value["title"].string!)")
+                        print("  URL: \(value["link"].string!)")
+                        print("--------------------------------------------------")
+                        isOK = true
+                    }
+                    self.tableView.reloadData()
+                case .failure(let error):
+                    print("Error")
+                    print(error)
+                    print(error.localizedDescription)
                     print("--------------------------------------------------")
                     isOK = true
                 }
-                self.tableView.reloadData()
-            } else {
-                print("Error")
-                print(response.result.error ?? "Unknown Error")
-                print(response.result.error?.localizedDescription ?? "No Description...")
-                print("--------------------------------------------------")
-                isOK = true
+                
+                print("------------------------Feed----------------------")
+                if !isOK {
+                    print("Unknown Error")
+                    print("--------------------------------------------------")
+                }
             }
-            if !isOK {
-                print("Unknown Error")
-                print("--------------------------------------------------")
-            }
-        }
+        
         newsController.webView.reload()
     }
     

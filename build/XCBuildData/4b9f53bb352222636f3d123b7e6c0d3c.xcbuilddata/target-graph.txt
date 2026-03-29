@@ -1,0 +1,11 @@
+Target dependency graph (5 targets)
+Target 'Pods-SimpleRSSTests' in project 'Pods'
+➜ Explicit dependency on target 'Pods-SimpleRSS' in project 'Pods'
+Target 'Pods-SimpleRSS-SimpleRSSUITests' in project 'Pods'
+➜ Explicit dependency on target 'Alamofire' in project 'Pods'
+➜ Explicit dependency on target 'SwiftyJSON' in project 'Pods'
+Target 'Pods-SimpleRSS' in project 'Pods'
+➜ Explicit dependency on target 'Alamofire' in project 'Pods'
+➜ Explicit dependency on target 'SwiftyJSON' in project 'Pods'
+Target 'SwiftyJSON' in project 'Pods' (no dependencies)
+Target 'Alamofire' in project 'Pods' (no dependencies)

@@ -1,0 +1,23 @@
+{
+  "version": 0,
+  "use-external-names": false,
+  "case-sensitive": false,
+  "roots": [{
+    "type": "directory",
+    "name": "/Users/shuntaro/Documents/Projects/simplerss/build/Release/Alamofire/Alamofire.framework/Modules",
+    "contents": [{
+      "type": "file",
+      "name": "module.modulemap",
+      "external-contents": "/Users/shuntaro/Documents/Projects/simplerss/build/Pods.build/Release/Alamofire.build/unextended-module.modulemap",
+    }]
+    },
+    {
+    "type": "directory",
+    "name": "/Users/shuntaro/Documents/Projects/simplerss/build/Release/Alamofire/Alamofire.framework/Headers",
+    "contents": [{
+      "type": "file",
+      "name": "Alamofire-Swift.h",
+      "external-contents": "/Users/shuntaro/Documents/Projects/simplerss/build/Pods.build/Release/Alamofire.build/unextended-interface-header.h",
+    }]
+  }]
+}

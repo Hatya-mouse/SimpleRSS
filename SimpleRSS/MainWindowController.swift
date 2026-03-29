@@ -44,7 +44,7 @@ class MainWindowController: NSWindowController {
             if feeds.count > 0 {
                 popupMenu.itemArray[0].title = feeds[0].title
                 if feeds.count > 1 {
-                    for i in 1...feeds.count - 1 {
+                    for i in 1..<feeds.count {
                         popupMenu.addItem(withTitle: feeds[i].title)
                     }
                 }
@@ -56,7 +56,7 @@ class MainWindowController: NSWindowController {
             feed = lastFeed
             sideBar.feed = feed
             var index = 0
-            for i in 0...feeds.count - 1 {
+            for i in 0..<feeds.count {
                 if feeds[i].url == feed.url {
                     index = i
                     continue
@@ -122,14 +122,18 @@ class MainWindowController: NSWindowController {
             }
             if !contains {
                 let jsonURL = "https://api.rss2json.com/v1/api.json?rss_url=\(url)"
-                request(jsonURL).responseData { res in
-                    var title = ""
-                    if let values = res.result.value { title = JSON(values)["feed"]["title"].stringValue }
-                    if self.feeds.count < 1 {
-                        self.popupMenu.removeItem(at: 0)
+                AF.request(jsonURL).responseData { response in
+                    switch response.result {
+                    case .success(let values):
+                        let title = JSON(values)["feed"]["title"].stringValue
+                        if self.feeds.count < 1 {
+                            self.popupMenu.removeItem(at: 0)
+                        }
+                        self.feed = Feed(url, title: title)
+                        self.setFeed(true)
+                    case .failure(let error):
+                        break
                     }
-                    self.feed = Feed(url, title: title)
-                    self.setFeed(true)
                 }
             } else {
                 DispatchQueue.main.async {
